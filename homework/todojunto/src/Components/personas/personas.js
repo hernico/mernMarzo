@@ -6,7 +6,6 @@ class Personas extends Component {
 
         this.state = {
             age: this.props.age,
-            // company: "mercerdes"
 
         }
     }
