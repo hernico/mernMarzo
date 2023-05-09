@@ -1,21 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
 import axios from "axios"
-import { Route, Routes } from 'react-router-dom';
+import Counter from './components/About';
 
 
 function App() {
   return (
     <div className="App">
       
-<Routes>
+      hola mundo
 
- <Route path='/about' element={<About/>} />
-
-</Routes>
-
- 
-
+    <Counter/>
+        
     </div>
   );
 }

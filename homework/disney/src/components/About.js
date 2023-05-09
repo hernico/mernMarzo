@@ -1,5 +1,16 @@
-const Hola = () => {
-    Hola mundo}
-hola mundo
+import React, { useState } from "react";
 
-export default Hola;
+
+
+function Counter (){
+    const [count,setCount] = useState(0);
+
+const increment= () => setCount(count+1)
+
+    return(
+
+        <button onClick={increment}>{count}</button>
+    )
+}
+
+export default Counter;
