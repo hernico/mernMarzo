@@ -12,6 +12,8 @@ const RegisterForm = () => {
 const submitForm = (event) => {
   event.preventDefault();
   setFirstName(event.target.value)
+  console.log('  setFirstName :',   setFirstName);
+  console.log(' :', );
   console.log(FirstName,LastName,Email,Password,ConfirmPassword);
   
 }
@@ -35,7 +37,6 @@ const submitForm = (event) => {
       <label>Confirm Password</label>
       <input type="password" />
 
-    <button>Register</button>
 
     <label>First Name : {FirstName}</label>
 

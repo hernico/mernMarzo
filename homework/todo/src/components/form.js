@@ -16,6 +16,7 @@ const SignInForm = () => {
     return(
     <div onSubmit={submitForm}>
         <input placeholder="Nombre" {...name} onChange={name.onChange}/>
+        console.log('name.onChange :', name.onChange);
         <input placeholder="Apellido" value={apellido.value} onChange={apellido.onChange}/>
         <input placeholder="Email" {...email} onChange={email.onChange}/>
         <input placeholder="Password" type="password" {...password} onChange={password.onChange}/>
