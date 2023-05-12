@@ -1,44 +1,57 @@
-import { useState } from "react";
+import useInput from "./useInput";
+import React from "react";
 
 const RegisterForm = () => {
+  const FirstName = useInput("");
+  const LastName = useInput("");
+  const Email = useInput("");
+  const Password = useInput("");
+  const ConfirmPassword = useInput("");
 
-  const [FirstName,setFirstName] = useState("");
-  console.log('FirstName :', FirstName);
-  const [LastName,setLastName] = ("");
-  const [Email,setEmail] = ("");
-  const [Password,setPassword] = ("");
-  const [ConfirmPassword,setConfirmPassword] = ("");
-
-const submitForm = (event) => {
-  event.preventDefault();
-  setFirstName(event.target.value)
-  console.log('  setFirstName :',   setFirstName);
-  console.log(' :', );
-  console.log(FirstName,LastName,Email,Password,ConfirmPassword);
-  
-}
-
+  const submitForm = (event) => {
+    event.preventDefault();
+    console.log(event.target.name, event.target.value);
+  };
 
   return (
-
     <form onSubmit={submitForm}>
-      <label>First Name</label>
-      <input type="text" value={FirstName.value} onChange={submitForm} />
+      <div className="form-group">
+        <label htmlFor="FirstName">First Name</label>
+        <input type="text" {...FirstName} onChange={FirstName.onChange} />
+      </div>
 
-      <label>Last Name</label>
-      <input type="text" />
+      <div className="form-group">
+        <label htmlFor="LastName">Last Name</label>
+        <input type="text" {...LastName} onChange={LastName.onChange} />
+      </div>
+      <div className="form-group">
+        <label htmlFor="Email">Email</label>
+        <input type="text" {...Email} onChange={Email.onChange} />
+      </div>
+      <div className="form-group">
+        <label htmlFor="Password">Password</label>
+        <input type="password" {...Password} onChange={Password.onChange} />
+      </div>
+      <div className="form-group">
+        <label htmlFor="ConfirmPassword">Confirm Password</label>
+        <input type="password" {...ConfirmPassword} onChange={ConfirmPassword.onChange} />
+      </div>
 
-      <label>Email</label>
-      <input type="email" />
-
-      <label>Password</label>
-      <input type="password" />
-
-      <label>Confirm Password</label>
-      <input type="password" />
-
-
-    <label>First Name : {FirstName}</label>
+      <div className="form-group">
+        <label>First Name : {FirstName.value}</label>
+      </div>
+      <div className="form-group">
+        <label>Last Name : {LastName.value}</label>
+      </div>
+      <div className="form-group">
+        <label>Email : {Email.value}</label>
+      </div>
+      <div className="form-group">
+        <label>Password : {Password.value}</label>
+      </div>
+      <div className="form-group">
+        <label>Confirm Password : {ConfirmPassword.value}</label>
+      </div>
 
 
     </form>
