@@ -14,8 +14,6 @@ onChange: handleChange
 
 }
 
-
-
 }
 
 export default useInput;
