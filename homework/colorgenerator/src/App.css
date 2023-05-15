@@ -52,3 +52,31 @@
   margin-bottom: 2rem;
   border: 2px solid black;
 }
+
+.navtab {
+  width: 800px;
+  margin: 0 auto;
+  border: 1px solid black;
+  font-size: 1.5rem;
+}
+.tabs {
+  border: 2px solid yellowgreen;
+}
+.tab-item {
+  display: inline-block;
+  margin: 0.5rem;
+  border: 2px solid ye;
+  padding: 0.5rem;
+  font-weight: bold;
+}
+.tab-item:hover {
+  text-decoration: underline;
+}
+.selected {
+  background-color: purple;
+  color: white;
+}
+.tab-view {
+  border: 2px solid rgb(12, 199, 206);
+  min-height: 4rem;
+}
