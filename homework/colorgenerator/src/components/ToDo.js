@@ -3,23 +3,23 @@ import { useState } from "react";
 import { Checkbox } from 'antd';
 
 function ToDo() {
-  const [colors, setColors] = useState(["yellow"]);
+  const [todos, setTodos] = useState(["Agregar tu primera tarea"]);
 
-  const [newColor, setNewColor] = useState("");
+  const [newTodo, setNewTodo] = useState("");
 
-  // console.log(newColor);
+  // console.log(newTodo);
 
-  function addColor(ev) {
+  function addTodo(ev) {
     ev.preventDefault();
-    setColors([...colors, newColor]);
-    setNewColor("");
+    setTodos([...todos, newTodo]);
+    setNewTodo("");
   }
 
   function borrar(ev) {
     console.log(ev.target.dataset.key);
-    const newColors = colors.filter((col) => col != ev.target.dataset.key);
-    console.log(newColors);
-    setColors(newColors);
+    const newTodos = todos.filter((tod) => tod != ev.target.dataset.key);
+    console.log(newTodos);
+    setTodos(newTodos);
   }
 
   const onChange = (e) => {
@@ -28,22 +28,22 @@ function ToDo() {
   
 
   return (
-    <div className="colors">
-      <form onSubmit={addColor}>
+    <div className="todos">
+      <form onSubmit={addTodo}>
         <input
           type="text"
           required
-          value={newColor}
-          onChange={(ev) => setNewColor(ev.target.value)}
+          value={newTodo}
+          onChange={(ev) => setNewTodo(ev.target.value)}
         />
         <input type="submit" value="Add" />
       </form>
       <div className="form-group">
         <div className="todo">
-          {colors.map((color) => (
-            <div data-key={color} key={color} onClick={borrar}  > 
-              {color}  <Checkbox className="checkbox"></Checkbox>
-              <button data-key={color} key={color}>Delete</button> 
+          {todos.map((todo) => (
+            <div data-key={todo} key={todo} onClick={borrar}  > 
+              {todo}  <Checkbox className="checkbox"></Checkbox>
+              <button data-key={todo} key={todo}>Delete</button> 
                </div>
             
           ))}
