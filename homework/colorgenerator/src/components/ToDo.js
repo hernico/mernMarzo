@@ -1,12 +1,13 @@
+import { CheckSquareOutlined } from "@ant-design/icons";
 import { useState } from "react";
+import { Checkbox } from 'antd';
 
-function Colors() {
+function ToDo() {
   const [colors, setColors] = useState(["yellow"]);
 
   const [newColor, setNewColor] = useState("");
 
   // console.log(newColor);
-
 
   function addColor(ev) {
     ev.preventDefault();
@@ -21,6 +22,11 @@ function Colors() {
     setColors(newColors);
   }
 
+  const onChange = (e) => {
+    console.log(`checked = ${e.target.checked}`);
+  };
+  
+
   return (
     <div className="colors">
       <form onSubmit={addColor}>
@@ -32,19 +38,20 @@ function Colors() {
         />
         <input type="submit" value="Add" />
       </form>
-      <div className="squares">
-        {colors.map((color) => (
-          <div
-            data-key={color}
-            key={color}
-
-            onDoubleClick={borrar}
-            style={{ backgroundColor: color }}
-          ></div>
-        ))}
+      <div className="form-group">
+        <div className="todo">
+          {colors.map((color) => (
+            <div data-key={color} key={color} onClick={borrar}  > 
+              {color}  <Checkbox className="checkbox"></Checkbox>
+              <button data-key={color} key={color}>Delete</button> 
+               </div>
+            
+          ))}
+       
+        </div>
       </div>
     </div>
   );
 }
 
-export default Colors;
+export default ToDo;

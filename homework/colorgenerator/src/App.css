@@ -80,3 +80,18 @@
   border: 2px solid rgb(12, 199, 206);
   min-height: 4rem;
 }
+
+.todo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* width: 200px; */
+  padding: 2rem;
+  margin-top: 2rem;
+  background-color: white;
+}
+
+.todo{
+  text-decoration: line-through ;
+  text-decoration-color: blue;
+  }
