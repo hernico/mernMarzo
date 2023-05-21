@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const SalidaPokemon = (props) => {
+const SalidaPokemonPromise = (props) => {
   const [listaPokemon, setListaPokemon] = useState([]);
 
   const traerDatos = async () => {
@@ -18,15 +18,16 @@ const SalidaPokemon = (props) => {
     setListaPokemon(lista);
   };
 
+
   return (
     <div>
-      <h1>API Pokemon</h1>
-      <button onClick={traerDatos}>Fetch Pokemon</button>
+      <h1>API Pokemon Fetch</h1>
+      <button onClick={traerDatos}>Fetch Pokemon </button>
       {listaPokemon.map((item, index) => {
-        return <li>{item}</li>;
+        return <li key={index}>{item}</li>;
       })}
     </div>
   );
 };
 
-export default SalidaPokemon;
+export default SalidaPokemonPromise;
