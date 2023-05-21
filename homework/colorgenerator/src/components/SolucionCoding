@@ -1,0 +1,75 @@
+import React, { useState } from 'react';
+
+export default () => {
+  // Initialize state to store the value of the input
+  const [inputVal, setInputVal] = useState('');
+  // Initialize state to store the list of items
+  const [list, setList] = useState([]);
+
+  // Create a function to add an item to the list
+  function add(e) {
+    // Prevent the form from submitting
+    e.preventDefault();
+
+    // If the input is empty, don't add the item
+    if(inputVal === '') return;
+
+    // Add the item to the list
+    setList([...list, {
+      text: inputVal,
+      completed: false
+    }]);
+
+    // Reset the input
+    setInputVal('');
+  }
+
+  // Create a function to remove an item from the list
+  function remove(index) {
+    // Filter the item out of the list
+    setList(list.filter((_item, i) => i !== index));
+  }
+
+  // Create a function to toggle the completed state of an item
+  function toggleChecked(index) {
+    // Create a copy of the item
+    const obj = {
+      ...list[index]
+    };
+
+    // Toggle the completed state
+    obj.completed = !obj.completed;
+
+    // Replace the item in the list
+    setList([
+      ...list.slice(0, index),
+      obj
+    ].concat(list.slice(index + 1)));
+  }
+
+  // Render the list of items
+  return (
+    <div>
+      {list.map((item, i) => (
+        <div key={i}>
+          <span style={{ textDecoration: item.completed && 'line-through' }}>{item.text}</span>
+          <input
+            type="checkbox"
+            checked={item.completed}
+            onClick={() => toggleChecked(i)}
+            readOnly
+          />
+          <button onClick={() => remove(i)}>Delete</button>
+        </div>
+      ))}
+
+      <form onSubmit={add}>
+        <input
+          onChange={e => setInputVal(e.target.value)}
+          value={inputVal}
+        />
+        <button>Add</button>
+      </form>
+    </div>
+  )
+}
