@@ -30,3 +30,4 @@ module.exports.getCompanyPerson = (req, res) => {
         country: faker.location.country()
     });
 }
+
