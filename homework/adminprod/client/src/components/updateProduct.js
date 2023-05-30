@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from 'axios';
 
 const UpdateProduct = () => {
-    var { idProduct } = useParams();
+    let { idProduct } = useParams();
     const [nombre, setNombre] = useState();
     const [precio, setPrecio] = useState();
     const [description, setDescription] = useState();

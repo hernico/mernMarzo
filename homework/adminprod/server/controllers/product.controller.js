@@ -1,20 +1,35 @@
 const Products = require("../models/product.model");
 
-module.exports.findAllProducts = async (req, res) => {
+module.exports.findAllProducts = async (request, response) => {
+  var result = await Products.find();
+  response.json(result);
+};
+
+
+// module.exports.findOneSingleProducts = async (request, response) => {
+//   var id = request.params.productoId;
+//   var producto = await Products.findOne({_id: id});
+//   response.json(producto);
+
+// }
+//   module.exports.findOneSingleProducts = (req, res) => {
+//     Products.findOne({ _id: req.params.id })
+// 		.then(oneSingleProducts => res.json({ Products: oneSingleProducts }))
+// 		.catch(err => res.json({ message: "Something went wrong", error: err }));
+// };
+
+module.exports.findOneSingleProducts = async (req, res) => {
   try {
-    const allDaProducts = await Products.find();
-    res.json({ Product: allDaProducts });
+    const oneSingleProducts = await Products.findOne({ _id: req.params.id });
+    res.json({ Products: oneSingleProducts });
   } catch (err) {
-    res.json({ message: "Something went wrong", error: err });
+    res.json({ message: "Something went wrong aqui", error: err });
+    console.log(req.params.id)  ;
   }
-};
+};  
 
 
-  module.exports.findOneSingleProducts = (req, res) => {
-    Products.findOne({ _id: req.params.id })
-		.then(oneSingleProducts => res.json({ Products: oneSingleProducts }))
-		.catch(err => res.json({ message: "Something went wrong", error: err }));
-};
+
 
 module.exports.createNewProducts = async (req, res) => {
   try {

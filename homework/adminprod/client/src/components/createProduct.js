@@ -18,7 +18,7 @@ const CreateProduct = () => {
 
             .then(res => console.log(res))
             .catch(err => console.log(err))
-            navigate("/new");
+            navigate("/products/new");
     }
 
     return (
@@ -40,7 +40,9 @@ const CreateProduct = () => {
                 <input type="submit" />
             </form>
             <button onClick={() => navigate("/products")}>Go to List</button>
-            <button onClick={() => navigate("/products/update")}>Update a Product</button>
+           
+
+
         </div>
     )
 }
