@@ -6,6 +6,7 @@ module.exports = app => {
     app.get("/api/productolist/", ProductsController.encontrarTodos);
     app.get("/api/productolist/:id", ProductsController.encontrarUnProducto);
     app.put("/api/productolist/actualizar/:id", ProductsController.actualizarUnProducto);
-    // app.delete("/api/productolist/borrar/:id", ProductsController.borrarUnProducto);
+    app.delete("/api/productolist/eliminar/:id", ProductsController.eliminarUnProducto);
+
     
     }

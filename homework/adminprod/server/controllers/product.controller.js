@@ -43,3 +43,12 @@ module.exports.actualizarUnProducto = async (req, res) => {
     res.json({ message: "Something went wrong al actualizar un producto", error: err });
   }
 }
+
+module.exports.eliminarUnProducto = async (req, res) => {
+  try {
+    const unProducto = await Producto.findByIdAndDelete(req.params.id);
+    res.json({ Producto: unProducto });
+  } catch (err) {
+    res.json({ message: "Something went wrong al borrar un producto", error: err });
+  }
+}

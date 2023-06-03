@@ -31,6 +31,10 @@ const UpdateProduct = () => {
       description: description,
     };
 
+
+
+
+
     axios
       .put(`http://localhost:8000/api/productolist/actualizar/${id}`, updatedProduct) 
       .then((res) => {

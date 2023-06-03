@@ -7,6 +7,8 @@ const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
   const navigate = useNavigate();
+  const [message, setMessage] = useState('');
+
 
   useEffect(() => {
     axios
@@ -20,6 +22,20 @@ const ProductDetail = () => {
 
   console.log('rendering ProductDetail');
 
+  const deleteProduct = (id) => {
+    if (window.confirm('Are you sure you want to delete this product?')) {
+      axios
+        .delete('http://localhost:8000/api/productolist/eliminar/' + id)
+        .then((res) => {
+          console.log(res.data);
+          setProduct(product.filter((product) => product._id !== id));
+          setMessage('Product deleted successfully');
+        })
+        .catch((err) => console.error(err));
+    }
+  };
+  
+
   return (
     <div>
       <h1>Product Detail</h1>
@@ -32,8 +48,11 @@ const ProductDetail = () => {
       )}
     
       <button onClick={() => navigate('/products')}>Go to List</button>
-      <button onClick={() => navigate('/products/actualizar/' + id)}>Update a 1</button>
-      <button onClick={() => navigate('/products/actualizar')}>Update a 2</button>
+      <button onClick={() => navigate('/products/actualizar/' + id)}>Edit Product</button>
+      <button onClick={() => navigate('/products/eliminar/'+ id )}>Delete Product</button>
+      <button onClick={() => deleteProduct(product._id)}>Delete</button>
+
+
     </div>
   );
 };
