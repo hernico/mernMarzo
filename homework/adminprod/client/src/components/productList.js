@@ -21,9 +21,9 @@ const ProductList = () => {
     }, []);
 
     const deleteProduct = (id) => {
-      if (window.confirm('Are you sure you want to delete this product?')) {
+      if (window.confirm('Estas seguro?')) {
         axios
-          .delete('http://localhost:8000/api/productolist/eliminar' + id)
+          .delete('http://localhost:8000/api/productolist/eliminar/' + id)
           .then((res) => {
             console.log(res.data);
             setProducts(products.filter((product) => product._id !== id));
