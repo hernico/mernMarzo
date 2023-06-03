@@ -1,9 +1,11 @@
 const ProductsController = require("../controllers/product.controller");
 
 module.exports = app => {
-    app.get("/api/products/", ProductsController.findAllProducts);
-    app.post("/api/products/new", ProductsController.createNewProducts);
-    app.get("/api/products/:id", ProductsController.findOneSingleProducts);
-    app.put("/api/products/update/:id", ProductsController.updateExistingProducts);
-    app.delete("/api/products/delete/:id", ProductsController.deleteAnExistingProducts);
-}
+   
+    app.post("/api/producto/nuevo", ProductsController.createProducto);
+    app.get("/api/productolist/", ProductsController.encontrarTodos);
+    app.get("/api/productolist/:id", ProductsController.encontrarUnProducto);
+    app.put("/api/productolist/actualizar/:id", ProductsController.actualizarUnProducto);
+    // app.delete("/api/productolist/borrar/:id", ProductsController.borrarUnProducto);
+    
+    }

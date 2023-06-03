@@ -1,59 +1,45 @@
-const Products = require("../models/product.model");
-
-module.exports.findAllProducts = async (request, response) => {
-  var result = await Products.find();
-  response.json(result);
-};
+const Producto = require("../models/product.model");
 
 
-// module.exports.findOneSingleProducts = async (request, response) => {
-//   var id = request.params.productoId;
-//   var producto = await Products.findOne({_id: id});
-//   response.json(producto);
-
-// }
-//   module.exports.findOneSingleProducts = (req, res) => {
-//     Products.findOne({ _id: req.params.id })
-// 		.then(oneSingleProducts => res.json({ Products: oneSingleProducts }))
-// 		.catch(err => res.json({ message: "Something went wrong", error: err }));
-// };
-
-module.exports.findOneSingleProducts = async (req, res) => {
+module.exports.createProducto= async (req, res) => {
   try {
-    const oneSingleProducts = await Products.findOne({ _id: req.params.id });
-    res.json({ Products: oneSingleProducts });
+    const nuevoProducto = await Producto.create(req.body);
+    res.json({ Producto: nuevoProducto });
   } catch (err) {
-    res.json({ message: "Something went wrong aqui", error: err });
-    console.log(req.params.id)  ;
-  }
-};  
-
-
-
-
-module.exports.createNewProducts = async (req, res) => {
-  try {
-    const newProduct = await Products.create(req.body);
-    res.json({ Product: newProduct });
-  } catch (err) {
-    res.json({ message: "Something went wrong", error: err });
+    res.json({ message: "Something went wrong con nuevo producto", error: err });
   }
 };
 
-  // Products.create(req.body)
-  //     .then(newlyCreatedProducts => res.json({ Product: newlyCreatedProducts }))
-  //     .catch(err => res.json({ message: "Something went wrong", error: err }));
-  // };
+module.exports.encontrarTodos = async (req, res) => {
+  try {
+    const todosLosProductos = await Producto.find();
+    res.json({ Producto: todosLosProductos });
+  } catch (err) {
+    res.json({ message: "Something went wrong al buscar todos los productos", error: err });
+  }
+};
 
-  module.exports.updateExistingProducts = (req, res) => {
-    Products.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
-      .then(updatedProducts => res.json({ Product: updatedProducts }))
-      .catch(err => res.json({ message: "Something went wrong", error: err }));
-  };
+module.exports.encontrarUnProducto = async (req, res) => {
+  try {
+    const unProducto = await Producto.findById(req.params.id);
+    res.json({ Producto: unProducto });
+  } catch (err) {
+    res.json({ message: "Something went wrong al buscar un producto", error: err });
+  }
+};
 
-  module.exports.deleteAnExistingProducts = (req, res) => {
-    Products.deleteOne({ _id: req.params.id })
-      .then(result => res.json({ result: result }))
-      .catch(err => res.json({ message: "Something went wrong", error: err }));
-  };
-  
+module.exports.actualizarUnProducto = async (req, res) => {
+  try {
+    const unProducto = await Producto.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+    res.json({ Producto: unProducto });
+  } catch (err) {
+    res.json({ message: "Something went wrong al actualizar un producto", error: err });
+  }
+}

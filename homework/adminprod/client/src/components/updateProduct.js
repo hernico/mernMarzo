@@ -1,63 +1,65 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const UpdateProduct = () => {
-    let { idProduct } = useParams();
-    const [nombre, setNombre] = useState();
-    const [precio, setPrecio] = useState();
-    const [description, setDescription] = useState();
+  const { id } = useParams();
+  const [nombre, setNombre] = useState("");
+  const [precio, setPrecio] = useState("");
+  const [description, setDescription] = useState("");
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        console.log(idProduct);
-        axios.get("http://localhost:8000/api/products/" + idProduct)
-        .then((response) => {
-            console.log(response.data.nombre);
-            console.log(response.data.precio);
-            console.log(response.data.description);
+  useEffect(() => {
+    console.log(id);
+    axios.get(`http://localhost:8000/api/productolist/actualizar/${id}`)
+      .then(res => {
+        console.log(res.data.Producto);
+        const product = res.data.Producto;
+        setNombre(product.nombre);
+        setPrecio(product.precio.toString());
+        setDescription(product.description);
+      })
+      .catch(err => console.error(err));
+  }, [id]);
 
-            setNombre(response.data.nombre);
-            setPrecio(response.data.precio);
-            setDescription(response.data.description);
-        });
-    }, []);
+  const onSubmitHandler = e => {
+    e.preventDefault();
+    const updatedProduct = {
+      nombre: nombre,
+      precio: parseInt(precio),
+      description: description,
+    };
 
-    const edit = (e) => {
-        e.preventDefault();
+    axios
+      .put(`http://localhost:8000/api/productolist/actualizar/${id}`, updatedProduct) 
+      .then((res) => {
+        console.log(res.data);
+        navigate('/products');
+      })
+      .catch((err) => console.log(err));
+  }
 
-        var datos = {
-            nombre: nombre,
-            precio: precio,
-            description: description
-        };
-
-        axios.put("http://localhost:8000/productos/update/" + idProduct, datos)
-        .then((response) => {
-            if(response.status == 200){
-                //retornamos a la lista
-            }
-        });
-    }
-
-    return(
-        <div>
-            <form onSubmit={edit}>
-                <div className="input-group">
-                    <span className="input-group-text" id="basic-addon3">Nombre</span>
-                    <input type="text" className="form-control" value={nombre} onChange={(e) => setNombre(e.target.value)} id="nombre" aria-describedby="basic-addon3 basic-addon4"/>
-                </div>
-                <div className="input-group">
-                    <span className="input-group-text" id="basic-addon3">Precio</span>
-                    <input type="text" className="form-control" value={precio} onChange={(e) => setPrecio(e.target.value)} id="precio" aria-describedby="basic-addon3 basic-addon4"/>
-                </div>
-                <div className="input-group">
-                    <span className="input-group-text" id="basic-addon3">Cantidad</span>
-                    <input type="text" className="form-control" value={description} onChange={(e) => setDescription(e.target.value)} id="cantidad" aria-describedby="basic-addon3 basic-addon4"/>
-                </div>
-                <button type="submit" className="btn btn-primary">Editar</button>
-            </form>
-        </div>
-    );
+  return (
+    <div>
+      <h1>Product Manager ACTUALIZADOR</h1>
+      <form onSubmit={onSubmitHandler}>
+        <p>
+          <label>Nombre</label><br />
+          <input type="text" name="nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} />
+        </p>
+        <p>
+          <label>Precio</label><br />
+          <input type="text" name="precio" value={precio} onChange={(e) => setPrecio(e.target.value)} />
+        </p>
+        <p>
+          <label>Descripción</label><br />
+          <input type="text" name="description" value={description} onChange={(e) => setDescription(e.target.value)} />
+        </p>
+        <input type="submit" value="Actualizar" />
+      </form>
+    </div>
+  )
 }
 
 export default UpdateProduct;
